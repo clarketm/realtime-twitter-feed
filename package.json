@@ -27,6 +27,7 @@
     "gulp-concat": "2.6.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.10.0",
-    "run-sequence": "1.1.5"
+    "run-sequence": "1.1.5",
+    "twit": "^2.2.4"
   }
 }
