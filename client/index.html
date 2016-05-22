@@ -2,11 +2,12 @@
 
   <head>
     <title>Angular 2, Twitter, Google Maps</title>
+    <base href="/">
 
     <!-- 1. Load libraries -->
     <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="content/all-the-things.css" />
-    <link rel="stylesheet" type="text/css" href="content/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/all-the-things.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 
     <script src="libs/angular2/bundles/angular2-polyfills.js"></script>
@@ -33,8 +34,28 @@
 
   </head>
   <!-- 3. Display the application -->
-  <body>
-    <my-app>Loading...</my-app>
+  <body class="blue-gradient-background">
+  <div class="navbar navbar-inverse navbar-default" role="navigation">
+    <div class="container navbar-container">
+      <div class="navbar-header">
+        <div class="navbar-brand">
+          <a href="/">
+            <img class="full-logo" src="img/pusher-logo.png" width="111" height="37" />
+          </a>
+        </div>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <!--<a class="signup-link" href="https://pusher.com/signup">Create a Free Account</a>-->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <my-app></my-app>
+
   </body>
 
 </html>

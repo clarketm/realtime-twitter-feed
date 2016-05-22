@@ -26,8 +26,8 @@ gulp.task('build:server', function () {
 // CLIENT
 
 /*
-  jsNPMDependencies, sometimes order matters here! so becareful!
-*/
+ jsNPMDependencies, sometimes order matters here! so becareful!
+ */
 var jsNPMDependencies = [
     'angular2/bundles/angular2-polyfills.js',
     'systemjs/dist/system.src.js',
@@ -49,7 +49,7 @@ gulp.task('build:index', function(){
     return [copyJsNPMDependencies, copyIndex];
 });
 
-gulp.task('build:app', ['build:templates', 'build:styles'], function(){
+gulp.task('build:app', ['build:templates', 'build:styles', 'build:images'], function(){
     var tsProject = ts.createProject('client/tsconfig.json');
     var tsResult = gulp.src('client/**/*.ts')
         .pipe(sourcemaps.init())
@@ -65,8 +65,13 @@ gulp.task('build:templates', function(){
 });
 
 gulp.task('build:styles', function(){
-    var cssResult = gulp.src('client/**/*.css')
-        .pipe(gulp.dest('dist/content'))
+    var cssResult = gulp.src('client/css/**/*.css')
+        .pipe(gulp.dest('dist/css'))
+});
+
+gulp.task('build:images', function(){
+    return gulp.src(['client/img/**/*.png', 'client/img/**/*.jpg'])
+        .pipe(gulp.dest('dist/img'))
 });
 
 
