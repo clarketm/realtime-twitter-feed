@@ -27,3 +27,8 @@
 .tweets-container {
   width: 800px;
 }
+
+.map {
+  height: 500px;
+  width: 100%;
+}

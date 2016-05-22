@@ -41,7 +41,7 @@ gulp.task('build:index', function(){
     
     //Let's copy our head dependencies into a dist/libs
     var copyJsNPMDependencies = gulp.src(mappedPaths, {base: 'node_modules'})
-        .pipe(gulp.dest('dist/libs'));
+        .pipe(gulp.dest('dist/public/libs'));
      
     //Let's copy our index into dist   
     var copyIndex = gulp.src('client/index.html')
@@ -60,20 +60,19 @@ gulp.task('build:app', ['build:templates', 'build:styles', 'build:images'], func
 });
 
 gulp.task('build:templates', function(){
-    var htmlResult = gulp.src('client/**/*.html')
+    return gulp.src('client/**/*.html')
         .pipe(gulp.dest('dist'))
 });
 
 gulp.task('build:styles', function(){
-    var cssResult = gulp.src('client/css/**/*.css')
-        .pipe(gulp.dest('dist/css'))
+    return gulp.src('client/css/**/*.css')
+        .pipe(gulp.dest('dist/public/css'))
 });
 
 gulp.task('build:images', function(){
     return gulp.src(['client/img/**/*.png', 'client/img/**/*.jpg'])
-        .pipe(gulp.dest('dist/img'))
+        .pipe(gulp.dest('dist/public/img'))
 });
-
 
 
 gulp.task('build', function(callback){
