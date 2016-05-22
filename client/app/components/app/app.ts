@@ -13,8 +13,7 @@ import {SubscriptionComponent} from '../subscription/subscription'
     template: '<router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES]
 })
-export class AppComponent { 
-    
+export class AppComponent {
     constructor(){
         console.log("We are up and running!");
     }

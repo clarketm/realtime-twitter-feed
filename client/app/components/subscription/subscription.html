@@ -1,0 +1,14 @@
+<style>
+    .map {
+        height: 500px;
+        width: 100%;
+    }
+
+</style>
+
+<div id="map-{{className}}" class="map"></div>
+<ul class="channel-results channel-{{className}}">
+    <li *ngFor="#result of tweets">
+        <p class="white" [innerHTML]="result.tweet.text"></p>
+    </li>
+</ul>
