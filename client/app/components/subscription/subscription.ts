@@ -94,7 +94,7 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
 
     public createGoogleMap(mapId) {
         this.googleMap = new google.maps.Map(mapId, {
-            center: {lat: 37.4316, lng: 78.6569},
+            center: {lat: 37.4316, lng: -78.6569},
             minZoom: 2,
             maxZoom: 15,
             zoom: 2
