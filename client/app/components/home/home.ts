@@ -3,7 +3,7 @@ declare var io:any;
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from 'angular2/core';
 import {SubscriptionComponent} from "../subscription/subscription";
-import "socket.io-client"
+
 
 @Component({
     selector: 'home',
