@@ -1,4 +1,5 @@
 declare var Pusher: any;
+declare var io: any;
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from 'angular2/core';
@@ -10,17 +11,18 @@ import {SubscriptionComponent} from "../subscription/subscription";
     directives: [SubscriptionComponent],
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
     private newSearchTerm: string;
-    private pusher;
+    private socket:any;
     private channels: any[];
 
     constructor() {
-        this.pusher = new Pusher('9fd1b33fcb36d968145f');
+        this.socket = io.connect();
         this.channels = [];
     }
 
     public newSubscription() {
+        this.socket.emit('keyword-change', this.newSearchTerm);
         this.channels.push({term: this.newSearchTerm, active: true});
         this.newSearchTerm = '';
     }
@@ -41,6 +43,4 @@ export class HomeComponent implements OnInit {
             }
         }
     }
-
-    ngOnInit() { }
 }

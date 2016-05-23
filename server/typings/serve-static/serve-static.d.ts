@@ -1,6 +1,4 @@
-// Compiled using typings@0.6.10
-// Source: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d1f6bde13f2209be42e86c3686761e8bfcbb50a5/serve-static/serve-static.d.ts
-// Type definitions for serve-static 1.7.1
+﻿// Type definitions for serve-static 1.7.1
 // Project: https://github.com/expressjs/serve-static
 // Definitions by: Uros Smolnik <https://github.com/urossmolnik/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -12,6 +10,8 @@
 
  =============================================== */
 
+/// <reference path="../express/express.d.ts" />
+/// <reference path="../mime/mime.d.ts" />
 
 declare module "serve-static" {
     import * as express from "express";

@@ -1,5 +1,3 @@
-// Compiled using typings@0.6.10
-// Source: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d1f6bde13f2209be42e86c3686761e8bfcbb50a5/express/express.d.ts
 // Type definitions for Express 4.x
 // Project: http://expressjs.com
 // Definitions by: Boris Yankov <https://github.com/borisyankov/>
@@ -12,6 +10,8 @@
 
  =============================================== */
 
+/// <reference path="../node/node.d.ts" />
+/// <reference path="../serve-static/serve-static.d.ts" />
 
 declare module Express {
 
