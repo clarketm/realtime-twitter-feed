@@ -1,3 +1,7 @@
+<div id="floating-panel">
+    <input (click)="toggleMarkers()" type=button value="{{isVisibleMarkers ? 'Hide' : 'Show' }} Markers">
+    <input (click)="toggleHeatMap()" type=button value="{{isVisibleHeatMap ? 'Hide' : 'Show' }} Heatmap">
+</div>
 <div id="map-{{className}}" class="map"></div>
 <ul class="channel-results channel-{{className}}">
     <li *ngFor="#result of tweets">
