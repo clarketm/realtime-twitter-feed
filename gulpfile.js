@@ -46,7 +46,11 @@ gulp.task('build:index', function(){
     //Let's copy our index into dist   
     var copyIndex = gulp.src('client/index.html')
         .pipe(gulp.dest('dist'));
-    return [copyJsNPMDependencies, copyIndex];
+
+    var copyEnv = gulp.src(['.env', 'Procfile'])
+        .pipe(gulp.dest('dist'));
+
+    return [copyJsNPMDependencies, copyIndex, copyEnv];
 });
 
 gulp.task('build:app', ['build:templates', 'build:styles', 'build:images'], function(){
