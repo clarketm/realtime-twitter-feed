@@ -9,11 +9,11 @@ var app = express(),
     Twit = require('twit');
 
 
-app.use(express.static(__dirname + '/app'));
-app.use(express.static(__dirname + '/public'));
+//app.use('/app', express.static(path.resolve(__dirname, 'app')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 var T = new Twit({
