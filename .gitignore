@@ -44,3 +44,4 @@ server/**/*.js
 
 dist
 .idea
+*.iml
