@@ -1,9 +1,9 @@
-declare var Pusher:any;
 declare var io:any;
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from 'angular2/core';
 import {SubscriptionComponent} from "../subscription/subscription";
+import "socket.io-client"
 
 @Component({
     selector: 'home',
@@ -28,7 +28,7 @@ export class HomeComponent {
     }
 
     public clearSearch(channel) {
-        this.channels = this.channels.filter((ch) => {
+        this.channels = this.channels.filter((ch:any) => {
             if (ch.term === channel.term) {
                 ch.active = false;
             }

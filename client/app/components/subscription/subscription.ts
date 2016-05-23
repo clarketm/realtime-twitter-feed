@@ -1,5 +1,4 @@
 declare var google:any;
-declare var io:any;
 
 import {
     Component,
