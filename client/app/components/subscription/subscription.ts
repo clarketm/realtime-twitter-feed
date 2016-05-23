@@ -25,6 +25,7 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
     private markers:any[] = [];
     private googleMap:any;
     private heatMap:any;
+    private infowindow:any;
     private points:any[] = new google.maps.MVCArray();
 
     isVisibleMarkers:boolean = true;
@@ -33,6 +34,9 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
     public ngOnInit() {
         this.className = this.search.term.replace(' ', '-');
         this.channel = btoa(this.search.term);
+        this.infowindow = new google.maps.InfoWindow({
+            maxWidth: 240
+        });
         this.tweets = [];
         this.activateSocket();
     }
@@ -65,17 +69,15 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
             contentString =
                 `<h5>${tweet.user.name}</h5>
                 <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
-                 <p style="font-size: 15px">${tweet.text}</p>`,
-            infowindow = new google.maps.InfoWindow({
-                content: contentString,
-                maxWidth: 220
-            });
+                 <p style="font-size: 15px">${tweet.text}</p>`;
+
         console.debug(tweet);
         this.markers.push(marker);
         this.points.push(new google.maps.LatLng(lat, long));
 
         google.maps.event.addListener(marker, 'click', () => {
-            infowindow.open(this.googleMap, marker);
+            this.infowindow.setContent(contentString);
+            this.infowindow.open(this.googleMap, marker);
         });
         this.googleMap.setCenter(marker.getPosition());
     }
