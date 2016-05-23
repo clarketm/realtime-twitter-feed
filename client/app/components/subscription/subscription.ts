@@ -63,9 +63,9 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
                 animation: google.maps.Animation.DROP
             }),
             contentString =
-                `<p>tweet.user.name</p>
-                <p><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></p>
-                 <p>${tweet.text}</p>;`,
+                `<h5>${tweet.user.name}</h5>
+                <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
+                 <p><small>${tweet.text}</small></p>;`,
             infowindow = new google.maps.InfoWindow({
                 content: contentString,
                 maxWidth: 200
