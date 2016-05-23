@@ -9,7 +9,7 @@ var app = express(),
     Twit = require('twit');
 
 
-//app.use('/app', express.static(path.resolve(__dirname, 'app')));
+app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.get('/*', (req, res) => {
