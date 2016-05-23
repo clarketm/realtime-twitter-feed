@@ -4,19 +4,17 @@ import path = require('path');
 var port:number = process.env.PORT || 3000;
 
 var app = express(),
-    server = app.listen(app.get('port')),
+    server = app.listen(port),
     io = require('socket.io')(server),
     Twit = require('twit');
 
 
-app.set('port', (process.env.PORT || 5000));
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'index.html'));
+    res.sendFile(__dirname + '/index.html');
 });
-
 
 var T = new Twit({
         consumer_key: '8hVWeqjGoHvVo75vM5zw9R0gw',
