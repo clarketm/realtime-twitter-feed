@@ -14,11 +14,13 @@ import {
     selector: 'subscription',
     templateUrl: 'app/components/subscription/subscription.html'
 })
-export class SubscriptionComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewChecked {
+export class SubscriptionComponent implements OnInit, AfterViewChecked {
     @Input() search:any;
     @Input() socket;
     public tweets:Object[];
+    private tweet:any;
     private channel;
+    private isPaused:boolean = false;
     private subscribed:boolean = false;
     private className:String;
     private googleMap:any;
@@ -27,7 +29,12 @@ export class SubscriptionComponent implements OnInit, OnDestroy, AfterViewChecke
         this.className = this.search.term.replace(' ', '-');
         this.channel = btoa(this.search.term);
         this.tweets = [];
+        this.activateSocket();
+    }
+
+    private activateSocket() {
         this.socket.on('twitter-stream', (tweet) => {
+            this.tweet = tweet;
             this.subscribeToChannel(tweet);
         });
     }
@@ -37,6 +44,9 @@ export class SubscriptionComponent implements OnInit, OnDestroy, AfterViewChecke
     }
 
     public subscribeToChannel(tweet) {
+        console.log("paused", this.isPaused);
+        if (this.isPaused) { return; }
+
         let lat = tweet.geo.coordinates[0],
             long = tweet.geo.coordinates[1],
             marker = new google.maps.Marker({
@@ -55,12 +65,9 @@ export class SubscriptionComponent implements OnInit, OnDestroy, AfterViewChecke
             infowindow.open(this.googleMap, marker);
         });
         this.googleMap.setCenter(marker.getPosition());
-        this.subscribed = true;
     }
 
     public ngAfterViewInit() {
-        console.log("init");
-        console.log(this.className);
         let mapId = document.querySelector("#map-" + this.className),
             listItem = document.querySelector(".channel-" + this.className);
 
@@ -73,22 +80,17 @@ export class SubscriptionComponent implements OnInit, OnDestroy, AfterViewChecke
     }
 
     public createGoogleMap(mapId) {
-        console.log("create map");
         this.googleMap = new google.maps.Map(mapId, {
             center: {lat: 37.4316, lng: 78.6569},
             zoom: 2
         });
     }
 
-    ngOnDestroy():any {
-        this.subscribed = false;
-    }
-
     public ngAfterViewChecked() {
-        if (!this.search.active && this.subscribed) {
-            this.ngOnDestroy();
-        } else if (this.search.active && !this.subscribed) {
-            //this.subscribeToChannel();
+        if (!this.search.active) {
+            this.isPaused = true;
+        } else if (this.search.active) {
+            this.isPaused = false;
         }
 
     }

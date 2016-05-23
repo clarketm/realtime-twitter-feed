@@ -1,5 +1,5 @@
-declare var Pusher: any;
-declare var io: any;
+declare var Pusher:any;
+declare var io:any;
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from 'angular2/core';
@@ -11,10 +11,10 @@ import {SubscriptionComponent} from "../subscription/subscription";
     directives: [SubscriptionComponent],
 })
 
-export class HomeComponent  {
-    private newSearchTerm: string;
+export class HomeComponent {
+    private newSearchTerm:string = '';
     private socket:any;
-    private channels: any[];
+    private channels:any[];
 
     constructor() {
         this.socket = io.connect();
@@ -23,18 +23,18 @@ export class HomeComponent  {
 
     public newSubscription() {
         this.socket.emit('keyword-change', this.newSearchTerm);
-        this.channels.push({term: this.newSearchTerm, active: true});
-        this.newSearchTerm = '';
+        this.channels = [{term: this.newSearchTerm, active: true}];
     }
 
     public clearSearch(channel) {
         this.channels = this.channels.filter((ch) => {
             if (ch.term === channel.term) {
-                this.toggleSearch(channel);
+                ch.active = false;
             }
             return ch.term !== channel.term;
         });
     }
+
     public toggleSearch(channel) {
         for (let ch of this.channels) {
             if (ch.term === channel.term) {
