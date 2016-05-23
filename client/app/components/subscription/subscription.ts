@@ -22,7 +22,13 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
     private isPaused:boolean = false;
     private subscribed:boolean = false;
     private className:String;
+    private markers:any[] = [];
     private googleMap:any;
+    private heatMap:any;
+    private points:any[] = new google.maps.MVCArray();
+
+    isVisibleMarkers:boolean = true;
+    isVisibleHeatMap:boolean = true;
 
     public ngOnInit() {
         this.className = this.search.term.replace(' ', '-');
@@ -44,22 +50,31 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
 
     public subscribeToChannel(tweet) {
         console.log("paused", this.isPaused);
-        if (this.isPaused) { return; }
+        if (this.isPaused) {
+            return;
+        }
 
         let lat = tweet.geo.coordinates[0],
             long = tweet.geo.coordinates[1],
             marker = new google.maps.Marker({
                 position: {lat: lat, lng: long},
-                map: this.googleMap,
+                map: this.isVisibleMarkers ? this.googleMap : null,
                 icon: tweet.user.profile_image_url,
                 animation: google.maps.Animation.DROP
             }),
             contentString =
-                `<p><a href="http://twitter.com/${tweet.user.name}">${tweet.user.name}</a></p>
+                `<p>tweet.user.name</p>
+                <p><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></p>
                  <p>${tweet.text}</p>;`,
             infowindow = new google.maps.InfoWindow({
-                content: contentString
+                content: contentString,
+                maxWidth: 200
             });
+
+
+        this.markers.push(marker);
+        this.points.push(new google.maps.LatLng(lat, long));
+
         google.maps.event.addListener(marker, 'click', () => {
             infowindow.open(this.googleMap, marker);
         });
@@ -81,8 +96,31 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
     public createGoogleMap(mapId) {
         this.googleMap = new google.maps.Map(mapId, {
             center: {lat: 37.4316, lng: 78.6569},
+            minZoom: 2,
+            maxZoom: 15,
             zoom: 2
         });
+
+        this.heatMap = new google.maps.visualization.HeatmapLayer({
+            data: this.points,
+            map: this.googleMap
+        });
+    }
+
+    private setMapOnAll(map) {
+        for (var i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(map);
+        }
+    }
+
+    private toggleMarkers() {
+        this.isVisibleMarkers = !this.isVisibleMarkers;
+        this.isVisibleMarkers ? this.setMapOnAll(this.googleMap) : this.setMapOnAll(null);
+    }
+
+    private toggleHeatMap() {
+        this.isVisibleHeatMap = !this.isVisibleHeatMap;
+        this.heatMap.setMap(this.isVisibleHeatMap ? this.googleMap : null);
     }
 
     public ngAfterViewChecked() {
