@@ -65,13 +65,12 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
             contentString =
                 `<h5>${tweet.user.name}</h5>
                 <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
-                 <p><small>${tweet.text}</small></p>;`,
+                 <p style="font-size: 15px">${tweet.text}</p>`,
             infowindow = new google.maps.InfoWindow({
                 content: contentString,
-                maxWidth: 200
+                maxWidth: 220
             });
-
-
+        console.debug(tweet);
         this.markers.push(marker);
         this.points.push(new google.maps.LatLng(lat, long));
 
