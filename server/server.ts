@@ -57,6 +57,8 @@ io.sockets.on('connection', function (socket) {
             console.log('Stream Stopped');
         }
 
+        console.log(keyword);
+
         stream = createStream(keyword);
         currentKeyword = keyword;
         io.sockets.emit('keyword-changed', currentKeyword);
