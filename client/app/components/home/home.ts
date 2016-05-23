@@ -12,7 +12,7 @@ import {SubscriptionComponent} from "../subscription/subscription";
 })
 
 export class HomeComponent {
-    private newSearchTerm:string = '';
+    private newSearchTerm:string;
     private socket:any;
     private channels:any[];
 
@@ -24,6 +24,7 @@ export class HomeComponent {
     public newSubscription() {
         this.socket.emit('keyword-change', this.newSearchTerm);
         this.channels = [{term: this.newSearchTerm, active: true}];
+        this.newSearchTerm = '';
     }
 
     public clearSearch(channel) {
