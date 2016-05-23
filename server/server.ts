@@ -2,15 +2,18 @@ import express = require('express');
 import path = require('path');
 
 var port:number = process.env.PORT || 3000;
+
 var app = express(),
-    server = app.listen(port),
+    server = app.listen(app.get('port')),
     io = require('socket.io')(server),
     Twit = require('twit');
 
+
+app.set('port', (process.env.PORT || 5000));
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
