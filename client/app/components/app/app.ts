@@ -2,20 +2,19 @@ import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router'
 
 import {HomeComponent} from '../home/home'
-import {SubscriptionComponent} from '../subscription/subscription'
+import {NavComponent} from "../navbar/navbar";
 
 @RouteConfig([
-    {path: '/', component: HomeComponent, as: 'Home'},
-    {path: '/subscription', component: SubscriptionComponent, as: 'Subscription'},
+    {path: '/', component: HomeComponent, as: 'Home'}
 ])
 @Component({
-    selector: 'my-app',
-    template: '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES]
+    selector: 'app',
+    templateUrl: 'app/components/app/app.html',
+    directives: [ROUTER_DIRECTIVES, NavComponent]
 })
 export class AppComponent {
     constructor(){
-        console.log("We are up and running!");
+        console.debug("We are up and running!");
     }
     
 }
