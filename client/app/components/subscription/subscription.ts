@@ -14,11 +14,11 @@ import {
     templateUrl: 'app/components/subscription/subscription.html'
 })
 export class SubscriptionComponent implements OnInit {
+    private count = 0;
+
     @Input() search:any;
     @Input() socket;
 
-    private tweet:any;
-    private channel;
     private className:String;
     private googleMap:any;
     private heatMap:any;
@@ -38,7 +38,7 @@ export class SubscriptionComponent implements OnInit {
 
     private activateSocket() {
         this.socket.on(btoa(this.search.term), (tweet) => {
-            this.tweet = tweet;
+            this.count++;
             this.subscribeToChannel(tweet);
         });
     }
