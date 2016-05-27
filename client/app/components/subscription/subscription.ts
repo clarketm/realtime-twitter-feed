@@ -69,14 +69,11 @@ export class SubscriptionComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
-        let mapId = document.querySelector("#map-" + this.className),
-            listItem = document.querySelector(".channel-" + this.className);
+        let mapId = document.querySelector("#map-" + this.className);
 
         if (mapId) {
             this.createGoogleMap(mapId);
-        }
-        if (listItem) {
-            listItem.scrollTop = listItem.scrollHeight;
+            window.scrollTo(0, mapId.offsetTop - 150);
         }
     }
 
