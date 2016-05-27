@@ -13,51 +13,37 @@ import {
     selector: 'subscription',
     templateUrl: 'app/components/subscription/subscription.html'
 })
-export class SubscriptionComponent implements OnInit, AfterViewChecked {
+export class SubscriptionComponent implements OnInit {
     @Input() search:any;
     @Input() socket;
-    public tweets:Object[];
+
     private tweet:any;
     private channel;
-    private isPaused:boolean = false;
-    private subscribed:boolean = false;
     private className:String;
-    private markers:any[] = [];
     private googleMap:any;
     private heatMap:any;
     private infowindow:any;
+    private markers:any[] = [];
     private points:any[] = new google.maps.MVCArray();
-
-    isVisibleMarkers:boolean = true;
-    isVisibleHeatMap:boolean = true;
+    private isVisibleMarkers:boolean = true;
+    private isVisibleHeatMap:boolean = true;
 
     public ngOnInit() {
         this.className = this.search.term.replace(' ', '-');
-        this.channel = btoa(this.search.term);
         this.infowindow = new google.maps.InfoWindow({
             maxWidth: 240
         });
-        this.tweets = [];
         this.activateSocket();
     }
 
     private activateSocket() {
-        this.socket.on('twitter-stream', (tweet) => {
+        this.socket.on(btoa(this.search.term), (tweet) => {
             this.tweet = tweet;
             this.subscribeToChannel(tweet);
         });
     }
 
-    private newTweet(data:Object) {
-        this.tweets.push(data);
-    }
-
     public subscribeToChannel(tweet) {
-        console.log("paused", this.isPaused);
-        if (this.isPaused) {
-            return;
-        }
-
         let lat = tweet.geo.coordinates[0],
             long = tweet.geo.coordinates[1],
             marker = new google.maps.Marker({
@@ -122,15 +108,6 @@ export class SubscriptionComponent implements OnInit, AfterViewChecked {
     private toggleHeatMap() {
         this.isVisibleHeatMap = !this.isVisibleHeatMap;
         this.heatMap.setMap(this.isVisibleHeatMap ? this.googleMap : null);
-    }
-
-    public ngAfterViewChecked() {
-        if (!this.search.active) {
-            this.isPaused = true;
-        } else if (this.search.active) {
-            this.isPaused = false;
-        }
-
     }
 
 }
