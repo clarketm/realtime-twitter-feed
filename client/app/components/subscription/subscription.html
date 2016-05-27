@@ -1,5 +1,6 @@
 <div id="floating-panel">
     <input (click)="toggleMarkers()" type=button value="{{isVisibleMarkers ? 'Hide' : 'Show' }} Markers">
     <input (click)="toggleHeatMap()" type=button value="{{isVisibleHeatMap ? 'Hide' : 'Show' }} Heatmap">
+    <span class="white pull-right">Count: {{count}}</span>
 </div>
 <div id="map-{{className}}" class="map"></div>
