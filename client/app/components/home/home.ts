@@ -25,7 +25,6 @@ export class HomeComponent {
         if (this.hasSearchterm(this.newSearchTerm)) {
             return this.goToSearchTerm(this.newSearchTerm.replace(" ", "-"));
         }
-        console.log("reached");
         this.socket.emit('search', this.newSearchTerm);
         this.channels.push({term: this.newSearchTerm, active: true});
         this.newSearchTerm = '';

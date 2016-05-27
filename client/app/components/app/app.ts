@@ -14,7 +14,7 @@ import {NavComponent} from "../navbar/navbar";
 })
 export class AppComponent {
     constructor(){
-        console.debug("We are up and running!");
+        //console.debug("We are up and running!");
     }
     
 }
