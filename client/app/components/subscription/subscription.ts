@@ -53,9 +53,12 @@ export class SubscriptionComponent implements OnInit {
                 animation: google.maps.Animation.DROP
             }),
             contentString =
-                `<h5>${tweet.user.name}</h5>
-                <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
-                 <p style="font-size: 15px">${tweet.text}</p>`;
+                `<div style="position: relative">
+                 <h5>${tweet.user.name}</h5>
+                 <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
+                 <p style="font-size: 15px">${tweet.text}</p>
+                 <button style="padding: 5px; font-size: 10px; position: absolute; top: -10px; right:0">remove</button>
+                 </div>`;
 
         console.debug(tweet);
         this.markers.push(marker);
