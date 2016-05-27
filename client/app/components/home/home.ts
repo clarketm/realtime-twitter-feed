@@ -22,9 +22,22 @@ export class HomeComponent {
     }
 
     public newSubscription() {
+        if (this.hasSearchterm(this.newSearchTerm)) {
+            return this.goToSearchTerm(this.newSearchTerm.replace(" ", "-"));
+        }
+        console.log("reached");
         this.socket.emit('search', this.newSearchTerm);
         this.channels.push({term: this.newSearchTerm, active: true});
         this.newSearchTerm = '';
+    }
+
+    hasSearchterm(term) {
+        return this.channels.find((item) => item.term === term);
+    }
+
+    goToSearchTerm(className) {
+        let mapId = document.querySelector("#map-" + className);
+        window.scrollTo(0, mapId.offsetTop - 150);
     }
 
     public clearSearch(channel) {
