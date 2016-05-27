@@ -31,7 +31,7 @@ export class SubscriptionComponent implements OnInit {
     public ngOnInit() {
         this.className = this.search.term.replace(' ', '-');
         this.infowindow = new google.maps.InfoWindow({
-            maxWidth: 240
+            maxWidth: 280
         });
         this.activateSocket();
     }
