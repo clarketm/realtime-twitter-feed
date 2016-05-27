@@ -22,66 +22,42 @@ var T = new Twit({
         access_token: '566709281-9RZaLQUI3O91ZXEYXEkpLBafVMNNJLBqk9YCZqep',
         access_token_secret: 'nE9k7sIVn93XkSLZLh28PztTzWATGdInTjB0u6kLqIsUX'
     }),
-    stream = null, // Define global stream holder as we will only ever have ONE active stream
-    currentKeyword = null, // Hold the current keyword we are streaming
-    currentSockets = 0; // Counter to determine number of open sockets
-
-
+    streams = new Map();
 
 io.sockets.on('connection', function (socket) {
-    currentSockets++;
-    socket.emit('connected', currentKeyword);
-
     console.log('Socket Connected');
 
-    if (currentKeyword !== null && stream === null) {
-        stream = createStream(currentKeyword);
-    }
-
     socket.on('disconnect', function () {
-        currentSockets--;
         console.log('Socket Disconnected');
-
-        if (stream !== null && currentSockets <= 0) {
-            stream.stop();
-            stream = null;
-            currentSockets = 0;
-            console.log('No active sockets, disconnecting from stream');
-        }
     });
 
-
-    socket.on('keyword-change', function (keyword) {
-        if (stream !== null) {
-            stream.stop();
-            console.log('Stream Stopped');
-        }
-
-        console.log(keyword);
-
-        stream = createStream(keyword);
-        currentKeyword = keyword;
-        io.sockets.emit('keyword-changed', currentKeyword);
-        console.log('Stream restarted with keyword => ' + currentKeyword);
+    socket.on('search', function (keyword) {
+        streams.set(keyword, createStream(keyword));
+        console.log(`Twitter stream started => ${keyword}`);
      });
+
+    socket.on('toggle', function (keyword, active) {
+        let stream = streams.get(keyword);
+        active ? stream.start() : stream.stop();
+        console.log(`Stream active state set to ${active} => ${keyword}`);
+    });
+
+    socket.on('delete', function (keyword) {
+        streams.get(keyword).stop();
+        streams.delete(keyword);
+        console.log(`Disconnected from twitter stream  =>  ${keyword}`);
+        console.log(`Active streams: ${streams.size}`);
+    })
 });
 
 
 function createStream(keyword) {
-    var stream = T.stream('statuses/filter', {track: keyword});
+    let stream = T.stream('statuses/filter', {track: keyword});
 
     stream.on('tweet', function (data) {
         if (data.geo && data.user.profile_image_url) {
-            io.sockets.emit('twitter-stream', data); // Emit our new tweet to ALL connected clients
+            io.sockets.emit(new Buffer(keyword).toString('base64'), data);
         }
-    });
-
-    stream.on('connect', function () {
-        console.log('Connected to twitter stream using keyword => ' + keyword);
-    });
-
-    stream.on('disconnect', function () {
-        console.log('Disconnected from twitter stream using keyword => ' + keyword);
     });
 
     return stream;

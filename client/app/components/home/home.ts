@@ -22,15 +22,15 @@ export class HomeComponent {
     }
 
     public newSubscription() {
-        this.socket.emit('keyword-change', this.newSearchTerm);
-        this.channels = [{term: this.newSearchTerm, active: true}];
+        this.socket.emit('search', this.newSearchTerm);
+        this.channels.push({term: this.newSearchTerm, active: true});
         this.newSearchTerm = '';
     }
 
     public clearSearch(channel) {
         this.channels = this.channels.filter((ch:any) => {
             if (ch.term === channel.term) {
-                ch.active = false;
+                this.socket.emit('delete', ch.term);
             }
             return ch.term !== channel.term;
         });
@@ -40,6 +40,7 @@ export class HomeComponent {
         for (let ch of this.channels) {
             if (ch.term === channel.term) {
                 ch.active = !ch.active;
+                this.socket.emit('toggle', ch.term, ch.active);
                 break;
             }
         }
