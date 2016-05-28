@@ -6,6 +6,11 @@ var del = require('del');
 var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 
+
+var paths = {
+
+};
+
 // SERVER
 gulp.task('clean', function(){
     return del('dist')
