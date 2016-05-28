@@ -3,4 +3,4 @@
     <input (click)="toggleHeatMap()" type=button value="{{isVisibleHeatMap ? 'Hide' : 'Show' }} Heatmap">
     <span class="white pull-right">Count: {{count}}</span>
 </div>
-<div id="map-{{className}}" class="map"></div>
+<div (click)="deleteMarker($event)" id="map-{{className}}" class="map"></div>

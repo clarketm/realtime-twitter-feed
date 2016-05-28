@@ -1,3 +1,4 @@
+import {count} from "rxjs/operator/count";
 declare var google:any;
 
 import {
@@ -23,7 +24,7 @@ export class SubscriptionComponent implements OnInit {
     private googleMap:any;
     private heatMap:any;
     private infowindow:any;
-    private markers:any[] = [];
+    private markers:any = new Map();
     private points:any[] = new google.maps.MVCArray();
     private isVisibleMarkers:boolean = true;
     private isVisibleHeatMap:boolean = true;
@@ -47,6 +48,7 @@ export class SubscriptionComponent implements OnInit {
         let lat = tweet.geo.coordinates[0],
             long = tweet.geo.coordinates[1],
             marker = new google.maps.Marker({
+                id: this.count.toString(),
                 position: {lat: lat, lng: long},
                 map: this.isVisibleMarkers ? this.googleMap : null,
                 icon: tweet.user.profile_image_url,
@@ -57,11 +59,11 @@ export class SubscriptionComponent implements OnInit {
                  <h5>${tweet.user.name}</h5>
                  <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
                  <p style="font-size: 15px">${tweet.text}</p>
-                 <button style="padding: 5px; font-size: 10px; position: absolute; top: -10px; right:0">remove</button>
+                 <button data-id="marker-${marker.id}" style="padding: 5px; font-size: 10px; position: absolute; top: -10px; right:0">hide</button>
                  </div>`;
 
         console.debug(tweet);
-        this.markers.push(marker);
+        this.markers.set(marker.id, marker);
         this.points.push(new google.maps.LatLng(lat, long));
 
         google.maps.event.addListener(marker, 'click', () => {
@@ -69,6 +71,15 @@ export class SubscriptionComponent implements OnInit {
             this.infowindow.open(this.googleMap, marker);
         });
         this.googleMap.setCenter(marker.getPosition());
+    }
+
+    public deleteMarker(event){
+        event.stopPropagation();
+        let dataId = event.target.getAttribute("data-id");
+        if (dataId) {
+            dataId = event.target.getAttribute("data-id").split("-")[1];
+            this.markers.get(dataId).setMap(null);
+        }
     }
 
     public ngAfterViewInit() {
@@ -95,9 +106,7 @@ export class SubscriptionComponent implements OnInit {
     }
 
     private setMapOnAll(map) {
-        for (var i = 0; i < this.markers.length; i++) {
-            this.markers[i].setMap(map);
-        }
+        this.markers.forEach((marker) => marker.setMap(map));
     }
 
     private toggleMarkers() {
