@@ -59,7 +59,7 @@ export class SubscriptionComponent implements OnInit {
                  <h5>${tweet.user.name}</h5>
                  <h6><a href="http://twitter.com/${tweet.user.screen_name}">@${tweet.user.screen_name}</a></h6>
                  <p style="font-size: 15px">${tweet.text}</p>
-                 <button data-id="marker-${marker.id}" style="padding: 5px; font-size: 10px; position: absolute; top: -10px; right:0">hide</button>
+                 <button data-id="marker-${marker.id}" style="padding: 5px; font-size: 10px; position: absolute; top: -10px; right:0">remove</button>
                  </div>`;
 
         console.debug(tweet);
