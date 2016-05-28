@@ -18,12 +18,15 @@ var paths = {
         'rxjs/bundles/Rx.js',
         'angular2/bundles/angular2.dev.js',
         'angular2/bundles/router.dev.js'
-    ]
+    ],
+    dist: 'dist',
+    public: 'dist/public',
+    libs: 'dist/public/libs'
 };
 
 // SERVER
 gulp.task('clean', function(){
-    return del('dist')
+    return del(paths.dist)
 });
 
 gulp.task('build:server', function () {
@@ -34,7 +37,7 @@ gulp.task('build:server', function () {
 	return tsResult.js
         .pipe(concat('server.js'))
         .pipe(sourcemaps.write()) 
-		.pipe(gulp.dest('dist'))
+		.pipe(gulp.dest(paths.dist))
 });
 
 
@@ -42,13 +45,13 @@ gulp.task('build:server', function () {
 gulp.task('build:libs', function(){
     var mappedPaths = paths.jsNPMDependencies.map(file => path.resolve('node_modules', file));
     
-    var copyJsNPMDependencies = gulp.src(mappedPaths, {base: 'node_modules'})
-        .pipe(gulp.dest('dist/public/libs'));
+    var dep = gulp.src(mappedPaths, {base: 'node_modules'})
+        .pipe(gulp.dest(paths.libs));
      
-    var copyEnv = gulp.src(['.env', 'Procfile'])
-        .pipe(gulp.dest('dist'));
+    var env = gulp.src(['.env', 'Procfile'])
+        .pipe(gulp.dest(paths.dist));
 
-    return [copyJsNPMDependencies, copyEnv];
+    return [dep, env];
 });
 
 gulp.task('build:ts', function(){
@@ -56,22 +59,22 @@ gulp.task('build:ts', function(){
         .pipe(sourcemaps.init())
         .pipe(ts(ts.createProject('client/tsconfig.json')))
         .pipe(sourcemaps.write())
-		.pipe(gulp.dest('dist'))
+		.pipe(gulp.dest(paths.dist))
 });
 
 gulp.task('build:templates', function(){
     return gulp.src(paths.html)
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(paths.dist))
 });
 
 gulp.task('build:styles', function(){
     return gulp.src(paths.css)
-        .pipe(gulp.dest('dist/public/css'))
+        .pipe(gulp.dest(paths.public))
 });
 
 gulp.task('build:images', function(){
     return gulp.src(paths.img)
-        .pipe(gulp.dest('dist/public/img'))
+        .pipe(gulp.dest(paths.public))
 });
 
 gulp.task('watch', function() {
@@ -84,5 +87,6 @@ gulp.task('watch', function() {
 gulp.task('build', function(callback){
     runSequence('clean', 'build:server', 'build:libs', 'build:ts', 'build:templates', 'build:styles', 'build:images', callback);
 });
+
 
 gulp.task('default', ['build', 'watch']);
