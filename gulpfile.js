@@ -4,6 +4,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var ts = require('gulp-typescript');
 var del = require('del');
 var concat = require('gulp-concat');
+var css = require('gulp-clean-css');
 var runSequence = require('run-sequence');
 
 
@@ -44,10 +45,10 @@ gulp.task('build:server', function () {
 // CLIENT
 gulp.task('build:libs', function(){
     var mappedPaths = paths.jsNPMDependencies.map(file => path.resolve('node_modules', file));
-    
+
     var dep = gulp.src(mappedPaths, {base: 'node_modules'})
         .pipe(gulp.dest(paths.libs));
-     
+
     var env = gulp.src(['.env', 'Procfile'])
         .pipe(gulp.dest(paths.dist));
 
@@ -69,6 +70,7 @@ gulp.task('build:templates', function(){
 
 gulp.task('build:styles', function(){
     return gulp.src(paths.css)
+        .pipe(css())
         .pipe(gulp.dest(paths.public))
 });
 
