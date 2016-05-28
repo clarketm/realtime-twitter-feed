@@ -36,7 +36,7 @@ var jsNPMDependencies = [
     'angular2/bundles/router.dev.js'
 ];
 
-gulp.task('build:index', function(){
+gulp.task('build:libs', function(){
     var mappedPaths = jsNPMDependencies.map(file => path.resolve('node_modules', file));
     
     //Let's copy our head dependencies into a dist/libs
@@ -53,7 +53,7 @@ gulp.task('build:index', function(){
     return [copyJsNPMDependencies, copyIndex, copyEnv];
 });
 
-gulp.task('build:app', ['build:templates', 'build:styles', 'build:images'], function(){
+gulp.task('build:ts', function(){
     var tsProject = ts.createProject('client/tsconfig.json');
     var tsResult = gulp.src('client/**/*.ts')
         .pipe(sourcemaps.init())
@@ -78,9 +78,15 @@ gulp.task('build:images', function(){
         .pipe(gulp.dest('dist/public/img'))
 });
 
-
-gulp.task('build', function(callback){
-    runSequence('clean', 'build:server', 'build:index', 'build:app', callback);
+gulp.task('watch', function() {
+    gulp.watch('client/**/*.ts', ['build:ts']);
+    gulp.watch('client/**/*.css', ['build:styles']);
+    gulp.watch('client/**/*.html', ['build:templates']);
 });
 
-gulp.task('default', ['build']);
+
+gulp.task('build', function(callback){
+    runSequence('clean', 'build:server', 'build:libs', 'build:ts', 'build:templates', 'build:styles', 'build:images', callback);
+});
+
+gulp.task('default', ['build', 'watch']);
