@@ -81,7 +81,6 @@ export class SubscriptionComponent implements OnInit {
             this.markers.get(dataId).setMap(null);
             this.markers.delete(dataId);
             this.points.removeAt(dataId-1);
-            console.log(this.points);
         }
     }
 
