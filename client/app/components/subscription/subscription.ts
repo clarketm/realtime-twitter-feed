@@ -25,7 +25,7 @@ export class SubscriptionComponent implements OnInit {
     private heatMap:any;
     private infowindow:any;
     private markers:any = new Map();
-    private points:any[] = new google.maps.MVCArray();
+    private points:any = new google.maps.MVCArray();
     private isVisibleMarkers:boolean = true;
     private isVisibleHeatMap:boolean = true;
 
@@ -79,6 +79,9 @@ export class SubscriptionComponent implements OnInit {
         if (dataId) {
             dataId = event.target.getAttribute("data-id").split("-")[1];
             this.markers.get(dataId).setMap(null);
+            this.markers.delete(dataId);
+            this.points.removeAt(dataId-1);
+            console.log(this.points);
         }
     }
 
