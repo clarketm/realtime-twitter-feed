@@ -30,7 +30,7 @@ export class SubscriptionComponent implements OnInit {
     private isVisibleHeatMap:boolean = true;
 
     public ngOnInit() {
-        this.className = this.search.term.replace(' ', '-').replace('#', '');
+        this.className = this.search.term.replace(/\s/g, '-').replace(/#/g, '');
         this.infowindow = new google.maps.InfoWindow({
             maxWidth: 280
         });
