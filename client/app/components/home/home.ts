@@ -36,6 +36,7 @@ export class HomeComponent {
 
     goToSearchTerm(className) {
         let mapId = document.querySelector("#map-" + className);
+        this.newSearchTerm = '';
         window.scrollTo(0, mapId.offsetTop - 150);
     }
 

@@ -51,7 +51,7 @@ export class SubscriptionComponent implements OnInit {
                 id: this.count.toString(),
                 position: {lat: lat, lng: long},
                 map: this.isVisibleMarkers ? this.googleMap : null,
-                icon: tweet.user.profile_image_url,
+                icon: tweet.user.profile_image_url_https,
                 animation: google.maps.Animation.DROP
             }),
             contentString =
