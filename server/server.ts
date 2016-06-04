@@ -55,7 +55,7 @@ function createStream(keyword) {
     let stream = T.stream('statuses/filter', {track: keyword});
 
     stream.on('tweet', function (data) {
-        if (data.geo && data.user.profile_image_url) {
+        if (data.geo && data.user.profile_image_url_https) {
             io.sockets.emit(new Buffer(keyword).toString('base64'), data);
         }
     });
