@@ -89,6 +89,8 @@ export class SubscriptionComponent implements OnInit {
 
         if (mapId) {
             this.createGoogleMap(mapId);
+            
+            //noinspection TypeScriptUnresolvedVariable
             window.scrollTo(0, mapId.offsetTop - 150);
         }
     }
