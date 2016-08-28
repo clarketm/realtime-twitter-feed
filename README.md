@@ -1,30 +1,32 @@
-# Angular2 Beta with Gulp, Typescript, and Express  
+# Realtime Twitter Feed
+### using Angular2, Twitter, Google Maps, Express, and Socket.io  
 
-This uses SystemJS and a minimally configured gulpfile. **This app uses HTML5 location paths.
-This app isn't meant to overwhelm you with an intensely complex gulp build system.**
+Get started by installing the dependencies with:
 
-If you're submitting pull requests please keep in mind that we shouldn't add features. Most examples are complete overkill for Angular2 beginners and we should just keep to the base libraries involved.
+```bash
+$ npm install
+```
 
-I tried to be as explicit as possible.
-I believe it to be organized well enough for you to create a more robust app.
+this will also trigger the build on `postinstall`. To run the build manually, simply run:
 
-I have purposefully made this project as THIN on the gulp side as possible as not to overwhelm people. 
+```bash
+$ gulp    
+```
 
-It's a supplement to this article: 
-
-[http://blog.edenmsg.com/angular2-typescript-gulp-and-expressjs/](http://blog.edenmsg.com/angular2-typescript-gulp-and-expressjs/) 
-
-Getting Started, grab the dependencies with:
-
-`npm install`
-
-then run
-
-`gulp`
-
-To run the server do this:
+To run the application using the node server:
 
 ```shell
-node dist/server.js
+$ node dist/server.js
+
+# or
+
+$ npm start
 ```
+
+
+#### Credits
+This project was inspired by the following projects/posts:
+
+* __Angular2 TypeScript Gulp and ExpressJS__ *Maximilian Alexander*
+* __Angular2 and Pusher__ *pusher-community*
 
