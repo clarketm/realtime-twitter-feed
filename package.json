@@ -54,9 +54,5 @@
     "run-sequence": "1.1.5",
     "typings": "^1.0.4"
   },
-  "homepage": "https://www.travismclarke.com",
-  "ignore": [
-    "**/.*",
-    "node_modules"
-  ]
+  "homepage": "https://www.travismclarke.com"
 }

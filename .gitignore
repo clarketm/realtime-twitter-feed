@@ -45,3 +45,5 @@ server/**/*.js
 dist
 .idea
 *.iml
+
+**/typings
