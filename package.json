@@ -7,7 +7,7 @@
     "node": "5.6.0"
   },
   "scripts": {
-    "postinstall": "gulp build",
+    "postinstall": "typings install && gulp build",
     "start": "node dist/server.js"
   },
   "repository": {
