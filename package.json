@@ -1,7 +1,7 @@
 {
-  "name": "express-app",
+  "name": "realtime-twitter-feed",
   "version": "1.0.0",
-  "description": "Angular2, Twitter, Google Maps, and Express",
+  "description": "Realtime Twitter feed Angular2, Twitter, Google Maps, Express, and Socket.io",
   "main": "dist/server.js",
   "engines": {
     "node": "5.6.0"
@@ -10,29 +10,53 @@
     "postinstall": "gulp build",
     "start": "node dist/server.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clarketm/realtime-twitter-feed"
+  },
+  "bugs": {
+    "url": "https://github.com/clarketm/realtime-twitter-feed/issues"
+  },
+  "keywords": [
+    "angular",
+    "angular 2",
+    "twitter",
+    "google maps",
+    "socket",
+    "socket.io",
+    "express",
+    "feed",
+    "twitter feed",
+    "angular 2 twitter feed",
+    "live twitter map"
+  ],
   "author": "Travis Clarke <travis.m.clarke@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "angular2": "2.0.0-beta.1",
-    "del": "2.2.0",
     "es6-promise": "3.0.2",
     "es6-shim": "0.33.3",
     "express": "4.13.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.0",
+    "systemjs": "0.19.16",
+    "zone.js": "0.5.10",
+    "socket.io": "^1.4.6",
+    "twit": "^2.2.4"
+  },
+  "devDependencies": {
     "gulp": "3.9.1",
     "gulp-clean-css": "^2.0.8",
     "gulp-concat": "2.6.0",
+    "del": "2.2.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.10.0",
-    "gulp-uglify": "^1.5.3",
-    "reflect-metadata": "0.1.2",
     "run-sequence": "1.1.5",
-    "rxjs": "5.0.0-beta.0",
-    "socket.io": "^1.4.6",
-    "systemjs": "0.19.16",
-    "twit": "^2.2.4",
-    "typings": "^1.0.4",
-    "zone.js": "0.5.10"
+    "typings": "^1.0.4"
   },
-  "devDependencies": {}
+  "homepage": "https://www.travismclarke.com",
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ]
 }

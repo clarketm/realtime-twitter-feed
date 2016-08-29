@@ -8,5 +8,10 @@
     "removeComments": false,
     "noImplicitAny": false,
     "noEmit": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "client"
+  ]
 }
