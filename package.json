@@ -44,9 +44,7 @@
     "socket.io": "^1.4.6",
     "systemjs": "0.19.16",
     "twit": "^2.2.4",
-    "zone.js": "0.6.10"
-  },
-  "devDependencies": {
+    "zone.js": "0.6.10",
     "del": "2.2.0",
     "gulp": "3.9.1",
     "gulp-clean-css": "^2.0.8",
