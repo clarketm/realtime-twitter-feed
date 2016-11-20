@@ -1340,7 +1340,8 @@ td, th {
 
 html {
     font-size: 10px;
-    -webkit-tap-highlight-color: transparent
+    -webkit-tap-highlight-color: transparent;
+    height: 100%;
 }
 
 body {
@@ -1348,7 +1349,7 @@ body {
     font-size: 14px;
     line-height: 1.42857143;
     color: #333333;
-    background-color: #fff
+    background-color: #fff;
 }
 
 input, button, select, textarea {
