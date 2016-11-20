@@ -1,10 +1,13 @@
 import express = require('express');
 import path = require('path');
 
-var port:number = process.env.PORT || 3000;
+// configure environment variables
+require('dotenv').config();
+
+var port:number = process.env.PORT;
 
 var app = express(),
-    server = app.listen(port),
+    server = app.listen(port, () =>  console.log(`Listening on port ${port}`)),
     io = require('socket.io')(server),
     Twit = require('twit');
 
@@ -19,8 +22,8 @@ app.get('/*', (req, res) => {
 var T = new Twit({
         consumer_key: '8hVWeqjGoHvVo75vM5zw9R0gw',
         consumer_secret: 'aqMRR8G5iG4d647A4haurFwChKWHDV8pE9QKB6kl5c8MBS9wAv',
-        access_token: '566709281-9RZaLQUI3O91ZXEYXEkpLBafVMNNJLBqk9YCZqep',
-        access_token_secret: 'nE9k7sIVn93XkSLZLh28PztTzWATGdInTjB0u6kLqIsUX'
+        access_token: '566709281-1OywZG64RfARHGIHvjmrMR9gsMlYthcmK8Vz4vUL',
+        access_token_secret: 'nNWAgKCdFmNF2eXynnj8PTyrEulwyzJdJnhLWqAr4L5XL'
     }),
     streams = new Map();
 
