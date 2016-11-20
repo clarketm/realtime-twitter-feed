@@ -29,10 +29,9 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build:server', function () {
-    var tsProject = ts.createProject('server/tsconfig.json'),
-        tsResult = gulp.src('server/**/*.ts')
+    var tsResult = gulp.src('server/**/*.ts')
             .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
+            .pipe(ts.createProject('server/tsconfig.json')());
     return tsResult.js
         .pipe(concat('server.js'))
         .pipe(sourcemaps.write())
@@ -55,7 +54,7 @@ gulp.task('build:libs', function () {
 gulp.task('build:ts', function () {
     return gulp.src(paths.ts)
         .pipe(sourcemaps.init())
-        .pipe(ts(ts.createProject('client/tsconfig.json')))
+        .pipe(ts.createProject('client/tsconfig.json')())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.dist))
 });

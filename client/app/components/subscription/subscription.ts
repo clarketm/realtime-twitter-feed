@@ -1,12 +1,9 @@
-import {count} from "rxjs/operator/count";
 declare var google:any;
 
 import {
     Component,
     Input,
-    AfterViewChecked,
     OnInit,
-    OnDestroy,
 } from 'angular2/core';
 
 
@@ -85,7 +82,7 @@ export class SubscriptionComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
-        let mapId = document.querySelector("#map-" + this.className);
+        let mapId = <HTMLElement>document.querySelector("#map-" + this.className);
 
         if (mapId) {
             this.createGoogleMap(mapId);

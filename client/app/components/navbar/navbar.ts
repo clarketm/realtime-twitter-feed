@@ -6,8 +6,5 @@ import {Component} from 'angular2/core';
 })
 
 export class NavComponent {
-    private active: string;
-
     constructor() {}
-
 }
