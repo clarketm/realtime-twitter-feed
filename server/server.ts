@@ -1,16 +1,16 @@
 import express = require('express');
 import path = require('path');
+import dotenv = require('dotenv');
+import IO = require('socket.io');
+import Twit = require('twit');
 
 // configure environment variables
-require('dotenv').config();
+dotenv.config();
 
-var port:number = process.env.PORT;
-
-var app = express(),
+var port:number = process.env.PORT,
+    app = express(),
     server = app.listen(port, () =>  console.log(`Listening on port ${port}`)),
-    io = require('socket.io')(server),
-    Twit = require('twit');
-
+    io = IO(server);
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use(express.static(path.resolve(__dirname, 'public')));
