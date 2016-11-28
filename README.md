@@ -3,7 +3,7 @@
 
 <br>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/clarketm/realtime-twitter-feed.git)
-### Checkout the [live demo](https://www.travismclarke.com/te_rjs_app/app.html)!
+### Checkout the [demo](http://app.travismclarke.com/)!
 <br>
 
 ## Get started
