@@ -7993,7 +7993,7 @@ form .tight.very label {
 h1 small, h2 small, h3 small, h4 small, .chat-app .time-divide .date small, h5 small, h6 small {
     font-size: 75%;
     font-weight: 400;
-    color: #777
+    color: #fff
 }
 
 h1.balanced, h2.balanced, h3.balanced, h4.balanced, .chat-app .time-divide .balanced.date, h5.balanced, h6.balanced {
@@ -9796,7 +9796,7 @@ h1 small, h2 small, h3 small, h4 small, .chat-app .time-divide .date small, h5 s
     font-weight: 200;
     margin-left: 10px;
     padding-left: 15px;
-    border-left: 1px solid #aaa
+    border-left: 2px solid #fff
 }
 
 .alternate.headings h1, .alternate.headings h2, .alternate.headings h3, .alternate.headings h4, .alternate.headings .chat-app .time-divide .date, .chat-app .time-divide .alternate.headings .date, .alternate.headings h5, .alternate.headings h6 {
