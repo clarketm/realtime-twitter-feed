@@ -51,6 +51,7 @@ $ npm start
 > the server *port* can be configured in the `.env` file
 
 <br>
+
 ## Credits
 This project was inspired by the following projects/posts:
 
