@@ -47,3 +47,5 @@ dist
 *.iml
 
 **/typings
+
+.env

@@ -20,10 +20,10 @@ app.get('/*', (req, res) => {
 });
 
 var T = new Twit({
-        consumer_key: '8hVWeqjGoHvVo75vM5zw9R0gw',
-        consumer_secret: 'aqMRR8G5iG4d647A4haurFwChKWHDV8pE9QKB6kl5c8MBS9wAv',
-        access_token: '566709281-1OywZG64RfARHGIHvjmrMR9gsMlYthcmK8Vz4vUL',
-        access_token_secret: 'nNWAgKCdFmNF2eXynnj8PTyrEulwyzJdJnhLWqAr4L5XL'
+        consumer_key: process.env.CONSUMER_KEY,
+        consumer_secret: process.env.CONSUMER_SECRET,
+        access_token: process.env.ACCESS_TOKEN,
+        access_token_secret: process.env.ACCESS_TOKEN_SECRET
     }),
     streams = new Map();
 
