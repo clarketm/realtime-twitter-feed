@@ -1,5 +1,6 @@
 import express = require('express');
 import path = require('path');
+import request = require('request');
 import dotenv = require('dotenv');
 import IO = require('socket.io');
 import Twit = require('twit');
@@ -7,13 +8,21 @@ import Twit = require('twit');
 // configure environment variables
 dotenv.config();
 
-var port:number = process.env.PORT,
+var port: number = process.env.PORT,
     app = express(),
-    server = app.listen(port, () =>  console.log(`Listening on port ${port}`)),
+    server = app.listen(port, () => console.log(`Listening on port ${port}`)),
     io = IO(server);
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use(express.static(path.resolve(__dirname, 'public')));
+
+app.get('/googlemaps', function (req, res) {
+    request(
+        'https://maps.googleapis.com/maps/api/js?key='
+        + process.env.GOOGLE_MAPS_KEY
+        + '&libraries=visualization'
+    ).pipe(res);
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
@@ -37,7 +46,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('search', function (keyword) {
         streams.set(keyword, createStream(keyword));
         console.log(`Twitter stream started => ${keyword}`);
-     });
+    });
 
     socket.on('toggle', function (keyword, active) {
         let stream = streams.get(keyword);

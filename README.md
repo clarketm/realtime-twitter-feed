@@ -11,18 +11,18 @@
 
 **1)** Create a new [Twitter application](https://apps.twitter.com/) and a new [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key). 
 
-**2)** Next, add your twitter API key and access token to the `server/server.ts` file:
+**2)** Next, add your twitter API key and access token to the `server/server.ts` file or add as environment variables in a `.env` file in the root of the project:
 
-```js
-consumer_key: 'CONSUMER_KEY',
-consumer_secret: 'CONSUMER_SECRET',
-access_token: 'ACCESS_TOKEN',
-access_token_secret: 'ACCESS_TOKEN_SECRET'
+```bash
+CONSUMER_KEY=...
+CONSUMER_SECRET=...
+ACCESS_TOKEN=...
+ACCESS_TOKEN_SECRET=...
 ```
-and your Google Maps browser key to the `client/index.html` file:
+and your Google Maps browser key to the `client/index.html` file or add as an environment variable in a `.env` file in the root of the project:
 
-```html
-<script src='//maps.googleapis.com/maps/api/js?key=API_KEY&libraries=visualization'></script>
+```bash
+GOOGLE_MAPS_KEY=...
 ```
 
 **3)** Install the project dependencies with:
