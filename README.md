@@ -2,8 +2,9 @@
 > using Angular2, Twitter, Google Maps, Express, and Socket.io
 
 <br>
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/clarketm/realtime-twitter-feed.git)
-### Checkout the [demo](http://app.travismclarke.com/)!
+### Checkout the [demo](http://happ1.travismclarke.com/)!
 <br>
 
 ## Get started
@@ -50,6 +51,7 @@ $ npm start
 > the server *port* can be configured in the `.env` file
 
 <br>
+
 ## Credits
 This project was inspired by the following projects/posts:
 
