@@ -4,7 +4,7 @@
   "description": "Realtime Twitter feed Angular2, Twitter, Google Maps, Express, and Socket.io",
   "main": "dist/server.js",
   "engines": {
-    "node": "5.6.0"
+    "node": "6.11.1"
   },
   "scripts": {
     "postinstall": "npm run typings && gulp build",
